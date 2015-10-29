@@ -1,0 +1,142 @@
+.box{
+	border: 2px solid grey;
+	margin: 2px;
+	padding: 5px;
+	display: inline-block;
+	border-radius: 10px;
+}
+
+.box ul{
+	list-style-type: none;
+}
+
+.box div{
+	padding: 5px;
+}
+
+.box div div{
+	border: 1px dashed grey;
+	text-align: center;
+	border-radius: 20px;
+	font-weight: bold;
+}
+
+.box img{
+	margin: auto;
+	padding: 5px;
+	width: 150px;
+	height: 150px;
+	border-radius: 20px;
+}
+
+.first_form{
+	margin-top: 5em;
+}
+
+.first_form h1{
+	text-align: center;
+}
+
+.first_form select{
+	width: 100px;
+}
+
+.first_form div{
+	margin-left: 2em;
+}
+
+.first_form select{
+	width: 150px;
+	height: 25px;
+}
+
+.first_form input[type=file]{
+	background-color: #FFCC00;
+	width: 100%;
+	margin: 1px;
+}
+
+.box input[type=checkbox]{
+	width: 40px;
+	height: 40px;
+	margin-bottom: 1em;
+}
+
+#upload{
+	background-color: #33CC33;
+	color: white;
+	font-weight: bold;
+}
+
+#selectAll{
+	background-color: #4D94FF;
+	color: white;
+	border-radius: 10px;
+	padding: 10px;
+	margin-left: 1em;
+}
+
+#unselectAll{
+	background-color: #FF1919;
+	color: white;
+	border-radius: 10px;
+	padding: 10px;
+	margin-left: 1em;
+}
+
+#applyAll{
+	background-color: #00CC00;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+	padding: 10px;
+	margin-left: 1em;
+}
+
+#gotoCheckout{
+	font-weight: bold;
+}
+
+#gotoTop{
+	font-weight: bold;
+	margin-left: 50%;
+}
+
+.submit{
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.order{
+	border: 1px solid silver;
+	margin: 2em;
+	margin-left: 30%;
+	width: 40%;
+	padding: 10px;
+}
+
+.order form p{
+	text-align: center;
+}
+	
+.order form input{
+	border: 1px solid silver;
+	display: block;
+	margin: 5px;
+}
+
+.order input[type=text]{
+	width: auto;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.order input[type=submit]{
+	margin-left: 35%;
+	margin-top: 1em;
+	font-size: 12pt;
+	background-color: #33CC33;
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+}
