@@ -29,8 +29,8 @@
 
 	if(isset($_POST['submit']) && empty($_POST['submit2'])){
 	
-		mkdir($_SERVER['DOCUMENT_ROOT']."/photo2/uploads/$_SESSION[user]");
-		$uploads_dir = $_SERVER['DOCUMENT_ROOT']."/photo2/uploads/$_SESSION[user]";
+		mkdir($_SERVER['DOCUMENT_ROOT']."/photo3/uploads/$_SESSION[user]");
+		$uploads_dir = $_SERVER['DOCUMENT_ROOT']."/photo3/uploads/$_SESSION[user]";
 		
 		//This loop uploads images with incrementing values as their names and sets the proper extension (e.g. 'jpg').		
 		foreach($_FILES['fileToUpload']['name'] as $index => $value){
@@ -137,12 +137,16 @@
 	} 
 ?>	
 
-<a id="gotoTop" href="#top">На верх</a>
+<div id="checkout"></div>
+<br><br><br>
 
-<div class="order" id="checkout">
+<div><a id="gotoTop" href="#top">На верх</a></div>
+
+<div class="order">
 		<form method="post" action="order.php">
-			<p id="total">Общее количество фотографий: <strong></strong></p>
-			<p id="totalPrice">Общая стоимость: <strong></strong></p><br>
+			<h4 id="total">Общее количество фотографий: <strong></strong></h4>
+			<h4 id="totalPrice">Общая стоимость: <strong></strong></h4><br>
+			<h4>Доставка: <strong>40 грн.</strong></h4>
 			Ваше имя:<input type="text" pattern={0} required title="Вы ничего не ввели" name="username" placeholder="Имя" >
 			Ваш email:<input type="text" pattern={0} required title="Вы ничего не ввели" name="email" placeholder="Email">
 			Ваш телефон:<input type="text" pattern=".{10,10}" maxlength="10" 
@@ -150,8 +154,13 @@
 			<input type="submit" name="submit2" value="Отправить заказ">
 		</form>
 </div>
-<button onclick="freq()">Frequency</button>
-<button onclick="howMany()">How Many?</button>
+
+<div id="delivery">Внимание! Оплата производиться только при получении заказа.<br> 
+					Стоимость доставки 40 грн.<br><br>
+					<strong>При заказе на сумму више 300 грн. ДОСТАВКА БЕСПЛАТНО.</strong><br>
+	<a href="#info">Узнать больше о доставке</a>
+</div>
+
 <div id="more">
 	<table>
 		<tbody>
@@ -181,6 +190,46 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+
+
+<div id="info"></div>
+<br>
+
+<div id="deliveryInfo">
+	При осуществлении заказа через наш интернет магазин оплата производиться только при получении вами вашего заказа.
+	Наш курьер доставит заказ в любую точку киева. Если же ваш заказа привышает 300 грн <strong>доставка бесплатно.</strong> Также возможна <strong>отправка по почте</strong>.
+	<br>
+	Уважаемый клиент! Мы с радостью свяжемся с вами по любым вашим вопросам. Оставьте <a data-toggle="modal" data-target="#pupUpWindow">заявку на консультацию</a>
+
+	<div class="modal fade" id="pupUpWindow">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<div class="modal-name" style="text-align:center;">
+							<h3>Заявка на консультацию</h3>
+						</div>
+					</div>
+					
+					<div class="modal-body">
+						<form role="form" method="post" action="consultation.php">
+							<div class="form-group">
+								<input type="text" name="cname" class="form-control" placeholder="Ваше имя">
+							</div>
+							<div class="form-group">
+								<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="cphone" class="form-control" placeholder="Ваш номер телефона (без тире)">
+							</div>
+							
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary btn-success" value="Отправить">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 </div>
 
 <script>
@@ -302,6 +351,9 @@ function getTotalQty(){
 		total += parseInt(qty[i].getElementsByTagName('strong')[0].innerHTML);
 	}
 	
+	if(isNaN(total))
+		return 0;
+		
 	return total;
 }
 
@@ -315,6 +367,8 @@ function getPrice(){
 	
 	return totalPrice.toFixed(2);
 }
+
+//BEGINNING OF DOING SOMETHING WIERD........................................
 
 //How many different photos have got the same format.
 function freq(){
@@ -340,7 +394,7 @@ function freq(){
 		window.alert(i + " = " + frequency[i]);
 	}
 }
-//BEGINNING OF DOING SOMETHING WIERD........................................
+
 function howMany(){
 	var res = getFreq('9x13');
 	window.alert(res);
@@ -359,7 +413,38 @@ function getFreq(elem){
 	}
 	return frequency;
 }
-//ENDING OF DOING SOMETHING WIERD BUT THIS WAS VERY NECESSARY FOR COMPLITE THIS TASK.............
+//ENDING OF DOING SOMETHING WIERD BUT THIS WAS VERY NECESSARY FOR COMPLETE THIS TASK.............
+
+//these are jQuery functions to make scrolling to top and checkout smoothly.
+//Make navbar buttons which are anchors to scroll smoothly
+$(document).ready(function(){
+		$("#nav").on("click","a", function (event) {
+			event.preventDefault();
+			var id  = $(this).attr('href'),
+			top = $(id).offset().top;
+			$('body,html').animate({scrollTop: top}, 500);
+		});
+});
+//Make go to top href smoothly
+$(document).ready(function(){
+	$('#gotoTop').click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('href'),
+		top = $(id).offset().top;
+		$('body,html').animate({scrollTop: top}, 500);
+	});
+});
+
+//Make go to checkout href smoothly
+$(document).ready(function(){
+	$('#gotoCheckout').click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('href'),
+		top = $(id).offset().top;
+		$('body,html').animate({scrollTop: top}, 500);
+	});
+});
+
 </script>
 
 </body>

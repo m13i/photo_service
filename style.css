@@ -109,18 +109,20 @@
 
 .order{
 	border: 1px solid silver;
+	border-radius: 20px;
 	margin: 2em;
 	margin-left: 30%;
 	width: 40%;
 	padding: 10px;
 }
 
-.order form p{
+.order form h4{
 	text-align: center;
 }
-	
+
 .order form input{
 	border: 1px solid silver;
+	align: center;
 	display: block;
 	margin: 5px;
 }
@@ -139,4 +141,31 @@
 	color: white;
 	padding: 10px;
 	border-radius: 10px;
+}
+
+#delivery{
+	text-align: center;
+	font-size: 14pt;
+	color: red;
+	border: 2px solid black;
+	border-radius: 20px;
+	width: 50%;
+	margin-left: 25%;
+	margin-bottom: 5px;
+}
+
+#deliveryInfo{
+	text-align: center;
+	font-size: 14pt;
+	border: 2px solid black;
+	border-radius: 20px;
+	width: 50%;
+	margin-left: 25%;
+	margin-bottom: 5px;
+}
+
+#deliveryInfo a{
+	font-weight: bold;
+	font-size: 16pt;
+	cursor: pointer;
 }
