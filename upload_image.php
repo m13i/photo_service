@@ -74,7 +74,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a onclick=window.open('index.html','_self')>На главную</a></li>
 						<li class="active"><a href="#">Каталог товаров</a></li>
-						<li><a data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
+						<li><a style="cursor: pointer" data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#top">Наверх</a></li>
@@ -116,11 +116,15 @@
 	echo "<center>ваш ID " . $_SESSION['user'] . "</center><br>";
 
 	$files = glob("uploads/$_SESSION[user]/*.{jpg,jpeg,png,gif,JPG}", GLOB_BRACE);
-		
+	
+	
 	foreach($files as $i => $file){
+		$filePath = explode('.', $file);//This is because glob sorts as a string and it's needed like numbers
+		$currentFile = "uploads/".$_SESSION['user']."/".$i.'.'.$filePath[1]; //$filePath[0] is path and $filePath[1]-is extension (e.g. jpg)
 ?>
 		<div class="box">
-			<img src="<?= $file ?>" >
+			<img src="<?=$currentFile?>" >
+			<p><?=$currentFile?></p>
 			<div>
 				<div>
 					<input type="checkbox" name="check" value="check">
