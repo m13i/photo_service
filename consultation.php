@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 </head>
 <body>
+
 <?php
 	session_start();
 

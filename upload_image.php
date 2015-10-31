@@ -74,6 +74,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a onclick=window.open('index.html','_self')>На главную</a></li>
 						<li class="active"><a href="#">Каталог товаров</a></li>
+						<li><a data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#top">Наверх</a></li>

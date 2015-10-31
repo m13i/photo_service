@@ -33,6 +33,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a onclick=window.open('index.html','_self')>На главную</a></li>
 						<li class="active"><a href="#">Каталог товаров</a></li>
+						<li><a style="cursor:pointer" data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#top">Наверх</a></li>
@@ -42,6 +43,35 @@
 		</div>
 	</div>
 </nav>
+
+<div class="modal fade" id="pupUpWindow">
+	<div class="modal-dialog">
+		<div class="modal-content">		
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="modal-name" style="text-align:center;">
+					<h3>Заявка на консультацию</h3>
+				</div>
+			</div>
+				
+			<div class="modal-body">
+				<form role="form" method="post" action="consultation.php">
+					<div class="form-group">
+						<input type="text" name="cname" class="form-control" placeholder="Ваше имя">
+					</div>
+					
+					<div class="form-group">
+						<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="cphone" class="form-control" placeholder="Ваш номер телефона (без тире)">
+					</div>
+						
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary btn-success" value="Отправить">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="first_form">
 	<form method="post" action="upload_image.php" enctype="multipart/form-data">
