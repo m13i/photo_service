@@ -67,7 +67,13 @@
 					<div class="modal-footer">
 						<input type="submit" class="btn btn-primary btn-success" value="Отправить">
 					</div>
+					
 				</form>
+				
+				<div class="alert alert-info fade in">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<p>Либо звоните по телефонам: 063-425-70-62 , 095-259-83-17</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -77,9 +83,20 @@
 	<form method="post" action="upload_image.php" enctype="multipart/form-data">
 	    <h1>Загрузка фотографий:</h1>
 	    <input class="submit"type="file" name="fileToUpload[]" id="fileToUpload" multiple>
-		<center><input class="submit" name="submit" type="submit" value="Загрузить фото" id="upload" ></center>
+		<center><input class="submit" name="submit" onclick=progressBar() type="submit" value="Загрузить фото" id="upload" ></center>
 	</form>
 </div>
+
+<div id="progress" style="text-align: center; display:none">
+	<p>Подождике пока не отобразятся ваши фото...</p>
+	<progress value="90" max="100"></progress>
+</div>
+
+<script>
+	function progressBar(){
+		document.getElementById('progress').style.display = "block";
+	}
+</script>
 
 </body>
 </html>

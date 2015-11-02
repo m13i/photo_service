@@ -20,7 +20,7 @@
 	
 	date_default_timezone_set("Europe/Kiev");
 	
-	@ $date = date('Y-m-d');
+	$date = date("Y-m-d H:i:s");
 	
 	$query = "INSERT INTO `consult`(`id`,`name`,`phone`,`date`) VALUES({$user}, '{$name}', '{$phone}', '{$date}')";
 	$result = $db->query($query);

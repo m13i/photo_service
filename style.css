@@ -143,6 +143,14 @@
 	border-radius: 10px;
 }
 
+.order blockquote{
+	background-color: wheat;
+}
+
+.order strong{
+	font-size: 18pt;
+}
+
 #delivery{
 	text-align: center;
 	font-size: 14pt;
@@ -159,8 +167,7 @@
 	font-size: 14pt;
 	border: 2px solid black;
 	border-radius: 20px;
-	width: 50%;
-	margin-left: 25%;
+	margin: 5px;
 	margin-bottom: 5px;
 }
 

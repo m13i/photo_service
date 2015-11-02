@@ -26,7 +26,8 @@
 	$result = db_connection();
 	$arr = $result->fetch_array();
 	$_SESSION['user'] = $arr[0];
-
+	$_SESSION['ext'] = array(); //This array will save all image extensions.
+	
 	if(isset($_POST['submit']) && empty($_POST['submit2'])){
 	
 		mkdir($_SERVER['DOCUMENT_ROOT']."/photo3/uploads/$_SESSION[user]");
@@ -37,10 +38,11 @@
 			$tmp_name = $_FILES['fileToUpload']['tmp_name'][$index];
 			$name = $_FILES['fileToUpload']['name'][$index];
 			$path = pathinfo($name);
+			$_SESSION['ext'][$index] = $path['extension']; // Assign variable that will save all extensions.
 			if(getimagesize($tmp_name) !== false) //Checking if uploaded file as truly image
-				move_uploaded_file($tmp_name, "$uploads_dir/$index.".$path['extension'] );
+				move_uploaded_file($tmp_name, "$uploads_dir/".($index+1).".".$path['extension'] );
 			else{ //if uploded file is not an image then throw notification and delete empty folder then exit from script.
-				echo "<center><h3>Извините но загружать можно только изображения, возможно вы выбрали лишний файл не являющийся изображением. Повторите заново.</h3></center>";
+				echo "<center><h3>Извините но загружать можно только изображения, возможно вы выбрали лишний файл не являющийся изображением либо не выбрали ничего. Повторите заново.</h3></center>";
 				echo "<center><a href='upload.php'>Повторить заново</a></center>";
 				rmdir($uploads_dir); //Delete empty folder
 				exit;
@@ -120,7 +122,7 @@
 	
 	foreach($files as $i => $file){
 		$filePath = explode('.', $file);//This is because glob sorts as a string and it's needed like numbers
-		$currentFile = "uploads/".$_SESSION['user']."/".$i.'.'.$filePath[1]; //$filePath[0] is path and $filePath[1]-is extension (e.g. jpg)
+		$currentFile = "uploads/".$_SESSION['user']."/".($i+1).'.'.$filePath[1]; //$filePath[0] is path and $filePath[1]-is extension (e.g. jpg)
 ?>
 		<div class="box">
 			<img src="<?=$currentFile?>" >
@@ -149,13 +151,30 @@
 
 <div class="order">
 		<form method="post" action="order.php">
-			<h4 id="total">Общее количество фотографий: <strong></strong></h4>
-			<h4 id="totalPrice">Общая стоимость: <strong></strong></h4><br>
-			<h4>Доставка: <strong>40 грн.</strong></h4>
+			<blockquote>
+				<h4 id="total">Общее количество фотографий: <strong></strong></h4>
+				<h4 id="totalPrice">Общая стоимость(без доставки): <strong></strong></h4>
+				<h4>Доставка: <strong>40 грн.</strong></h4>
+				<center><a style="cursor:pointer; font-size: 12pt;" data-toggle="modal" data-target="#pupUpWindow">Есть вопросы?</a></center>
+			</blockquote>
+			
+			<legend>Оформление заказа:</legend>
 			Ваше имя:<input type="text" pattern={0} required title="Вы ничего не ввели" name="username" placeholder="Имя" >
 			Ваш email:<input type="text" pattern={0} required title="Вы ничего не ввели" name="email" placeholder="Email">
 			Ваш телефон:<input type="text" pattern=".{10,10}" maxlength="10" 
 				required title="Слишком короткий номер телефона" name="phone" placeholder="Телефон">
+
+			<input type="hidden" class="glossFr" name="gloss9x13" >
+			<input type="hidden" class="glossFr" name="gloss10x15" >
+			<input type="hidden" class="glossFr" name="gloss13x18" >
+			<input type="hidden" class="glossFr" name="gloss15x21" >
+			<input type="hidden" class="glossFr" name="gloss20x30" >
+			<input type="hidden" class="mattFr" name="matt9x13" >
+			<input type="hidden" class="mattFr" name="matt10x15" >
+			<input type="hidden" class="mattFr" name="matt13x18" >
+			<input type="hidden" class="mattFr" name="matt15x21" >
+			<input type="hidden" class="mattFr" name="matt20x30" >
+			
 			<input type="submit" name="submit2" value="Отправить заказ">
 		</form>
 </div>
@@ -204,37 +223,44 @@
 <div id="deliveryInfo">
 	При осуществлении заказа через наш интернет магазин оплата производиться только при получении вами вашего заказа.
 	Наш курьер доставит заказ в любую точку киева. Если же ваш заказа привышает 300 грн <strong>доставка бесплатно.</strong> Также возможна <strong>отправка по почте</strong>.
+	<br>Также, если у вас есть какие либо вопросы мы с радостью ответим на них, для этого вам необходимо оставить заявку на консультацию после чего мы вам перезвоним,
+	либо позвонить нам по указаным номерам. 
 	<br>
-	Уважаемый клиент! Мы с радостью свяжемся с вами по любым вашим вопросам. Оставьте <a data-toggle="modal" data-target="#pupUpWindow">заявку на консультацию</a>
+	<strong>Уважаемый клиент! Мы с радостью ответим на все ваши вопросы. Оставьте <a data-toggle="modal" data-target="#pupUpWindow">заявку на консультацию</a></strong>
+</div>
 
-	<div class="modal fade" id="pupUpWindow">
-			<div class="modal-dialog">
-				<div class="modal-content">
+<div class="modal fade" id="pupUpWindow">
+	<div class="modal-dialog">
+		<div class="modal-content">
 					
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<div class="modal-name" style="text-align:center;">
-							<h3>Заявка на консультацию</h3>
-						</div>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="modal-name" style="text-align:center;">
+				<h3>Заявка на консультацию</h3>
+				</div>
+			</div>
+					
+			<div class="modal-body">
+				<form role="form" method="post" action="consultation.php">
+					<div class="form-group">
+						<input type="text" name="cname" class="form-control" placeholder="Ваше имя">
 					</div>
-					
-					<div class="modal-body">
-						<form role="form" method="post" action="consultation.php">
-							<div class="form-group">
-								<input type="text" name="cname" class="form-control" placeholder="Ваше имя">
-							</div>
-							<div class="form-group">
-								<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="cphone" class="form-control" placeholder="Ваш номер телефона (без тире)">
-							</div>
+					<div class="form-group">
+						<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="cphone" class="form-control" placeholder="Ваш номер телефона (без тире)">
+					</div>
 							
-							<div class="modal-footer">
-								<input type="submit" class="btn btn-primary btn-success" value="Отправить">
-							</div>
-						</form>
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary btn-success" value="Отправить">
 					</div>
+				</form>
+						
+				<div class="alert alert-info fade in">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<p>Либо звоните по телефонам: 063-425-70-62 , 095-259-83-17</p>
 				</div>
 			</div>
 		</div>
+	</div>
 </div>
 
 <script>
@@ -256,6 +282,8 @@ var price = {
 	'15x21' : 3.9,
 	'20x30' : 9.0
 };
+
+initAll(); //Set all photos 10x15 gloss format on page load.
 
 function select() {
 	var box = document.getElementsByName('check');
@@ -297,7 +325,9 @@ function applyToAll(){
 			document.getElementsByClassName('quantity')[i].getElementsByTagName('strong')[0].innerHTML = qty.value;
 		}
 	}
-	outputObject();		
+	outputObject();
+	getArrangedGloss();
+	getArrangedMatt();
 }
 
 function getFullQty(a){
@@ -373,52 +403,56 @@ function getPrice(){
 	return totalPrice.toFixed(2);
 }
 
-//BEGINNING OF DOING SOMETHING WIERD........................................
+function getArrangedGloss(){
+	var hids = document.getElementsByClassName('glossFr');
+	var len = hids.length;
+	
+	hids[0].value = arrange('9x13','Глянец');
+	hids[1].value = arrange('10x15','Глянец');
+	hids[2].value = arrange('13x18','Глянец');
+	hids[3].value = arrange('15x21','Глянец');
+	hids[4].value = arrange('20x30','Глянец');
 
-//How many different photos have got the same format.
-function freq(){
+}
+
+function getArrangedMatt(){
+	var hids = document.getElementsByClassName('mattFr');
+	var len = hids.length;
+	
+	hids[0].value = arrange('9x13','Мат');
+	hids[1].value = arrange('10x15','Мат');
+	hids[2].value = arrange('13x18','Мат');
+	hids[3].value = arrange('15x21','Мат');
+	hids[4].value = arrange('20x30','Мат');
+	
+}
+
+function arrange(fr, tp){
 	var format = document.getElementsByClassName('format');
+	var type = document.getElementsByClassName('type');
+	var qty = document.getElementsByClassName('quantity');
 	var len = format.length;
-	var frequency = {
-		'9x13'  : 0,
-		'10x15' : 0,
-		'13x18' : 0,
-		'15x21' : 0,
-		'20x30' : 0
-	};
-
+	var temp = "";
+	var pos = "";
+	
 	for(var i = 0; i < len; i++){
-		for(var key in formatQty){
-			if(format[i].getElementsByTagName('strong')[0].innerHTML == key){
-				frequency[key]++
+		if(format[i].getElementsByTagName('strong')[0].innerHTML == fr){
+			if(type[i].getElementsByTagName('strong')[0].innerHTML == tp){
+				temp = fr;
+				temp += '+';
+				temp += tp;
+				temp += '+';
+				temp += qty[i].getElementsByTagName('strong')[0].innerHTML;
+				temp += '+';
+				pos += (i+1).toString();
+				pos += ",";
 			}
 		}
 	}
 	
-	for(var i in frequency){
-		window.alert(i + " = " + frequency[i]);
-	}
+	temp += pos;
+	return temp;
 }
-
-function howMany(){
-	var res = getFreq('9x13');
-	window.alert(res);
-}
-
-//Returns the frequency of only element
-function getFreq(elem){
-	var format = document.getElementsByClassName('format');
-	var len = format.length;
-	var frequency = 0;
-	
-	for(var i = 0; i < len; i++){
-		if(format[i].getElementsByTagName('strong')[0].innerHTML == elem){
-			frequency++;
-		}
-	}
-	return frequency;
-}
-//ENDING OF DOING SOMETHING WIERD BUT THIS WAS VERY NECESSARY FOR COMPLETE THIS TASK.............
 
 //these are jQuery functions to make scrolling to top and checkout smoothly.
 //Make navbar buttons which are anchors to scroll smoothly
@@ -449,6 +483,23 @@ $(document).ready(function(){
 		$('body,html').animate({scrollTop: top}, 500);
 	});
 });
+
+function initAll(){
+	var format = document.getElementsByClassName('format');
+	var type = document.getElementsByClassName('type');
+	var qty = document.getElementsByClassName('quantity');
+	var len = format.length;
+	
+	for(var i = 0; i < len; i++){
+		format[i].getElementsByTagName('strong')[0].innerHTML = '10x15';
+		type[i].getElementsByTagName('strong')[0].innerHTML = 'Глянец';
+		qty[i].getElementsByTagName('strong')[0].innerHTML = 1;
+	}
+	outputObject();
+	getArrangedGloss();
+	getArrangedMatt();
+	
+}
 
 </script>
 
