@@ -31,8 +31,9 @@ $tempMatt[4] = $_POST['matt20x30'];
 
 //Explode gloss
 $gPhoto = array(); //Array of exploded gloss photos
-$mPhoto = array();
+$mPhoto = array(); //Array of exploded matt photos
 
+//exploding gloss photos
 foreach($tempGloss as $key => $value){
 	if($value != '+'){
 		$gPhoto[$key] = explode('+', $value);
@@ -42,6 +43,7 @@ foreach($tempGloss as $key => $value){
 	}
 }
 
+//exploding matt photos
 foreach($tempMatt as $key => $value){
 	if($value != '+'){
 		$mPhoto[$key] = explode('+', $value);
@@ -73,9 +75,16 @@ foreach($mattObject as $i)
 	echo $i->getInfo();
 
 
-$fullObject = array_merge($glossObject, $mattObject); //Merged two arrays together
-makeDir();
+//Create specific folder for each type, format and corresponding quantity
+makeGlossDir();
+makeMattDir();
+
+//Merge two arrays into one
+$fullObject = array_merge($glossObject, $mattObject);
 moveToDir();
+
+
+
 //Setting all POST variable to send to the DB.
 $date = date("Y-m-d H:i:s");
 $user = $_POST['username'];
@@ -105,48 +114,82 @@ else{
 
 <?php
 
-function makeDir(){
-	global $fullObject;
+//Making folders in file system with gloss format
+function makeGlossDir(){
+	global $glossObject;
 	$root = "uploads";
 	mkdir($root);
+	$expGloss = getQtyExploded($glossObject);
 	
-	foreach($fullObject as $key => $value){
+	foreach($glossObject as $key => $value){
 		if($value->getPosition() && $value->getType() == 'Глянец'){
 			mkdir("{$root}/{$_SESSION['user']}/Gloss");
 			mkdir("{$root}/{$_SESSION['user']}/Gloss/{$value->getFormat()}");
-			mkdir("{$root}/{$_SESSION['user']}/Gloss/{$value->getFormat()}/{$value->getQty()}");
-		}
-		else if($value->getPosition() && $value->getType() == 'Мат'){
-			mkdir("{$root}/{$_SESSION['user']}/Matt");
-			mkdir("{$root}/{$_SESSION['user']}/Matt/{$value->getFormat()}");
-			mkdir("{$root}/{$_SESSION['user']}/Matt/{$value->getFormat()}/{$value->getQty()}");
+			
+			
+			for($l = 0; $l < count($expGloss[$key]); $l++){
+				mkdir("{$root}/{$_SESSION['user']}/Gloss/{$value->getFormat()}/{$expGloss[$key][$l]}");
+			}
+			
 		}
 	}
 }
 
+//Making folders in file system which corresponds to matt format
+function makeMattDir(){
+	global $mattObject;
+	$root = "uploads";
+	mkdir($root);
+	$expMatt = getQtyExploded($mattObject);
+	
+	foreach($mattObject as $key => $value){
+		if($value->getPosition() && $value->getType() == 'Мат'){
+			mkdir("{$root}/{$_SESSION['user']}/Matt");
+			mkdir("{$root}/{$_SESSION['user']}/Matt/{$value->getFormat()}");
+			
+			
+			for($l = 0; $l < count($expMatt[$key]); $l++){
+				mkdir("{$root}/{$_SESSION['user']}/Matt/{$value->getFormat()}/{$expMatt[$key][$l]}");
+			}
+			
+		}
+	}
+}
+
+//Making exploded array to generate folders with correct quantity of some format.
+function getQtyExploded($arr){
+	$temp = array();
+	foreach($arr as $key => $value){
+		$temp[$key] = $value->explodeQty();
+	}
+	return $temp;
+}
+
+//Making exploded array of positions
+function getPosExploded($arr){
+	$temp = array();
+	foreach($arr as $key => $value){
+		$temp[$key] = $value->explodePosition();
+	}
+	return $temp;
+}
+
+//Moving uploaded files from root directory to specific format and quantity folders.
+// ***** TO DO *****
 function moveToDir(){
-	/*global $fullObject;
+	global $glossObject;
 	$ext = $_SESSION['ext'];
 	$root = "uploads/{$_SESSION['user']}";
-	$splited = array();
-
-	foreach($fullObject as $i => $v){
-			$splited[$i] = $v->explodePosition();
-	}
-		
-	foreach($fullObject as $key => $v){
+	$glossSplited = getPosExploded($glossObject);
+	
+	
+	
+	/*foreach($glossObject as $key => $v){
 		if($v->getType() == 'Глянец'){
-			if($splited[$i][0]){
-				
+			for($i = 0; $i < count($splited[$key]); $i++){
+				rename("{$root}/{$key}.{$ext[$key]}","{$root}/Gloss/{$v->getFormat()}/{$splited[$key][$i]}/{$key}.{$ext[$key]}");
 			}
 		}
-	}*/
-	
-	/*for($i = 0; $i < count($splited); $i++){
-		for($j = 0; $j < count($splited[$i]); $j++){
-			echo $splited[$i][$j] . "  ";
-		}
-		echo "<br>";
 	}*/
 }
 
