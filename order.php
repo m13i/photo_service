@@ -34,7 +34,7 @@ $gPhoto = array(); //Array of exploded gloss photos
 $mPhoto = array();
 
 foreach($tempGloss as $key => $value){
-	if($value){
+	if($value != '+'){
 		$gPhoto[$key] = explode('+', $value);
 	}
 	else{
@@ -43,7 +43,7 @@ foreach($tempGloss as $key => $value){
 }
 
 foreach($tempMatt as $key => $value){
-	if($value){
+	if($value != '+'){
 		$mPhoto[$key] = explode('+', $value);
 	}
 	else{
@@ -66,11 +66,11 @@ foreach($mPhoto as $key => $value){
 }
 
 //outputting all objects
-/*foreach($glossObject as $i)
+foreach($glossObject as $i)
 	echo $i->getInfo();
 
 foreach($mattObject as $i)
-	echo $i->getInfo();*/
+	echo $i->getInfo();
 
 
 $fullObject = array_merge($glossObject, $mattObject); //Merged two arrays together
@@ -98,6 +98,7 @@ else{
 }
 
 ?>
+
 
 </body>
 </html>

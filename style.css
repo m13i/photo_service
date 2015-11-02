@@ -4,6 +4,8 @@
 	padding: 5px;
 	display: inline-block;
 	border-radius: 10px;
+	font-size: 8pt;
+	
 }
 
 .box ul{
@@ -23,10 +25,17 @@
 
 .box img{
 	margin: auto;
-	padding: 5px;
-	width: 150px;
-	height: 150px;
+	margin-left: 25px;
+	padding: 2px;
+	width: 80px;
+	height: 80px;
 	border-radius: 20px;
+}
+
+.box input[type=checkbox]{
+	width: 40px;
+	height: 40px;
+	margin-bottom: 1em;
 }
 
 .first_form{
@@ -54,12 +63,6 @@
 	background-color: #FFCC00;
 	width: 100%;
 	margin: 1px;
-}
-
-.box input[type=checkbox]{
-	width: 40px;
-	height: 40px;
-	margin-bottom: 1em;
 }
 
 #upload{
@@ -111,9 +114,10 @@
 	border: 1px solid silver;
 	border-radius: 20px;
 	margin: 2em;
-	margin-left: 30%;
-	width: 40%;
-	padding: 10px;
+	margin-left: 0%;
+	width: 100%;
+	padding: 5px;
+	text-align: center;
 }
 
 .order form h4{
@@ -125,16 +129,19 @@
 	align: center;
 	display: block;
 	margin: 5px;
+	margin-left: 40%;
 }
 
 .order input[type=text]{
-	width: auto;
+	width: 17em;
+	height: 3em;
 	padding: 10px;
 	border-radius: 8px;
+	font-weight: bold;
 }
 
 .order input[type=submit]{
-	margin-left: 35%;
+	margin-left: 45%;
 	margin-top: 1em;
 	font-size: 12pt;
 	background-color: #33CC33;

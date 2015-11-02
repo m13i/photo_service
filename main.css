@@ -21,7 +21,7 @@
 
 .jumbotron {
   background-image:url('img/background.jpg');
-  height: 850px;
+  height: 1100px;
   background-repeat: no-repeat;
   background-size: cover;
   text-align: left;
@@ -30,8 +30,6 @@
 .jumbotron .container {
   position: relative;
   top: 20px;
-  /*background-color: #D7BCB4;*/
-  /*background-color: #E6F0FF;*/
   border-radius: 25px;
   opacity: 0.9;
 }
@@ -109,13 +107,18 @@
 #consult{
 	color: white;
 	background-color: #00C000;
-	width: 80%;
+	width: 100%;
 	border-radius: 25px;
 	margin-bottom: 20px;
 }
 
 #consult form{
 	padding-left: 40%;
+}
+
+#consult form input[type=text]{
+	width: 15em;
+	height: 3em;
 }
 
 .desc{

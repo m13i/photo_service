@@ -14,20 +14,20 @@
 	if(!$db)
 		echo "Невозможно подключится к базе данных";
 	
-	$user = $_SESSION['user'];
-	$name = $_POST['cname'];
-	$phone = $_POST['cphone'];
+	$name = $_POST['name'];
+	$email = $_POST['email'];
+	$phone = $_POST['phone'];	
 	
 	date_default_timezone_set("Europe/Kiev");
 	
 	$date = date("Y-m-d H:i:s");
 	
-	$query = "INSERT INTO `consult`(`id`,`name`,`phone`,`date`) VALUES({$user}, '{$name}', '{$phone}', '{$date}')";
+	$query = "INSERT INTO `home_consult`(`name`,`email`,`phone`,`date`) VALUES('{$name}','{$email}','{$phone}', '{$date}')";
 	$result = $db->query($query);
 	
 	if(!$result){
-		echo "Извините возникла ошибка. Возможно вы уже сделали заявку. Ожидайте звонка<br>";
-		echo "<a href='upload.php'>Отправить заново</a>";
+		echo "Извините возникла ошибка, попробуйте заново.<br>";
+		echo "<a href='index.html'>Отправить заново</a>";
 	}
 	else{
 		echo "<h3>Уважаемый(я) {$name} ваша заявка успешно отправлена. Мы позвоним вам на номер: {$phone}</h3>";

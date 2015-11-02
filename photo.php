@@ -38,9 +38,15 @@ class Photo{
 	}
 	
 	public function explodePosition(){
-		$exploaded = explode(',', $this->position);
+		$exploded = explode(',', $this->position);
 		
-		return $exploaded;
+		return $exploded;
+	}
+	
+	public function explodeQty(){
+		$qtyExploded = explode(',', $this->qty);
+		
+		return $qtyExploded;
 	}
 	
 }

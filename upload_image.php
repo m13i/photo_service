@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=800", user-scalable=false">
+	<meta name="viewport" content="width=420", user-scalable=false">
 	<title>Загрузка фотографий</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -151,17 +151,17 @@
 
 <div class="order">
 		<form method="post" action="order.php">
-			<blockquote>
-				<h4 id="total">Общее количество фотографий: <strong></strong></h4>
-				<h4 id="totalPrice">Общая стоимость(без доставки): <strong></strong></h4>
-				<h4>Доставка: <strong>40 грн.</strong></h4>
-				<center><a style="cursor:pointer; font-size: 12pt;" data-toggle="modal" data-target="#pupUpWindow">Есть вопросы?</a></center>
-			</blockquote>
+			<h4 id="total">Общее количество фотографий: <strong></strong></h4>
+			<h4 id="totalPrice">Общая стоимость(без доставки): <strong></strong></h4>
+			<h4>Доставка: <strong>40 грн.</strong></h4>
+			<center><a style="cursor:pointer; font-size: 12pt;" data-toggle="modal" data-target="#pupUpWindow">Есть вопросы?</a></center>
+			
+			<br>
 			
 			<legend>Оформление заказа:</legend>
-			Ваше имя:<input type="text" pattern={0} required title="Вы ничего не ввели" name="username" placeholder="Имя" >
-			Ваш email:<input type="text" pattern={0} required title="Вы ничего не ввели" name="email" placeholder="Email">
-			Ваш телефон:<input type="text" pattern=".{10,10}" maxlength="10" 
+			<p>Ваше имя:</p><input type="text" pattern={0} required title="Вы ничего не ввели" name="username" placeholder="Имя" >
+			<p>Ваш email:</p><input type="text" pattern={0} required title="Вы ничего не ввели" name="email" placeholder="Email">
+			<p>Ваш телефон:</p><input type="text" pattern=".{10,10}" maxlength="10" 
 				required title="Слишком короткий номер телефона" name="phone" placeholder="Телефон">
 
 			<input type="hidden" class="glossFr" name="gloss9x13" >
@@ -241,7 +241,7 @@
 			</div>
 					
 			<div class="modal-body">
-				<form role="form" method="post" action="consultation.php">
+				<form role="form" method="post" action="consultation.php" target="_blank">
 					<div class="form-group">
 						<input type="text" name="cname" class="form-control" placeholder="Ваше имя">
 					</div>
@@ -250,7 +250,7 @@
 					</div>
 							
 					<div class="modal-footer">
-						<input type="submit" class="btn btn-primary btn-success" value="Отправить">
+						<input type="submit" onclick=sent() class="btn btn-primary btn-success" value="Отправить">
 					</div>
 				</form>
 						
@@ -434,6 +434,7 @@ function arrange(fr, tp){
 	var len = format.length;
 	var temp = "";
 	var pos = "";
+	var qtyPos = "";
 	
 	for(var i = 0; i < len; i++){
 		if(format[i].getElementsByTagName('strong')[0].innerHTML == fr){
@@ -442,15 +443,16 @@ function arrange(fr, tp){
 				temp += '+';
 				temp += tp;
 				temp += '+';
-				temp += qty[i].getElementsByTagName('strong')[0].innerHTML;
-				temp += '+';
+				qtyPos += qty[i].getElementsByTagName('strong')[0].innerHTML;
+				qtyPos += ",";
 				pos += (i+1).toString();
 				pos += ",";
 			}
 		}
 	}
-	
-	temp += pos;
+	qtyPos += '+';
+	qtyPos += pos;;
+	temp += qtyPos;
 	return temp;
 }
 
@@ -501,7 +503,16 @@ function initAll(){
 	
 }
 
+function sent(){
+		if(document.getElementsByName('cphone')[0].value != ''){
+			window.alert("Спасибо! Ваша заявка была отправлена.");
+			document.getElementsByClassName('close')[0].click();
+		}
+	}
+
 </script>
+
+<footer>"Photo Service" Все права защищены &copy 2015.</footer>
 
 </body>
 </html>	 

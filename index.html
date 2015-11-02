@@ -73,16 +73,18 @@
 			</div>
 			
 			<div class="container-fluid" id="consult">
-				<form role="form" method="post" action="save_user.php">
-					<h3>Консультация</h3>
-					<p>Оставьте вашу заявку и мы перезвоним вам</p>
+				<form role="form" method="post" action="home_consult.php" target="_blank">
+					<div id="consult_head">
+						<h3>Консультация</h3>
+						<p>Оставьте вашу заявку и мы перезвоним вам</p>
+					</div>
 					<br>
 					<div class="form-group">
-						<input style="width: 13em" type="text" class="form-control" name="name" placeholder="Ваше имя">
+						<input type="text" class="form-control" name="name" placeholder="Ваше имя">
 						<br>
-						<input style="width: 13em" maxlength="30" type="text" class="form-control" name="email" placeholder="Ваш Email">
+						<input type="text" maxlength="30"  class="form-control" name="email" placeholder="Ваш Email (Необязательное поле)">
 						<br>
-						<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="phone" style="width: 13em" maxlength="10" class="form-control" id="num" placeholder="Номер телефона">
+						<input type="text" pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="phone" maxlength="10" class="form-control" id="num" placeholder="Номер телефона">
 						<br/>
 						<button type="submit" class="btn btn-primary">Отправить</button>
 					</div>	

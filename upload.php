@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=800", user-scalable=false">
+	<meta name="viewport" content="width=420", user-scalable=false">
 	<title>Загрузка фотографий</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -55,17 +55,21 @@
 			</div>
 				
 			<div class="modal-body">
-				<form role="form" method="post" action="consultation.php">
+				<form role="form" method="post" action="home_consult.php" target="_blank">
 					<div class="form-group">
-						<input type="text" name="cname" class="form-control" placeholder="Ваше имя">
+						<input type="text" name="name" class="form-control" placeholder="Ваше имя">
 					</div>
 					
 					<div class="form-group">
-						<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="cphone" class="form-control" placeholder="Ваш номер телефона (без тире)">
+						<input type="text" name="email" class="form-control" placeholder="Ваше email (Необязательное поле)">
 					</div>
-						
+					
+					<div class="form-group">
+						<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="phone" class="form-control" placeholder="Ваш номер телефона (без тире)">
+					</div>
+					
 					<div class="modal-footer">
-						<input type="submit" class="btn btn-primary btn-success" value="Отправить">
+						<input type="submit" onclick=sent() class="btn btn-primary btn-success" value="Отправить">
 					</div>
 					
 				</form>
@@ -88,7 +92,7 @@
 </div>
 
 <div id="progress" style="text-align: center; display:none">
-	<p>Подождике пока не отобразятся ваши фото...</p>
+	<p>Подождите пока не отобразятся ваши фото...</p>
 	<progress value="90" max="100"></progress>
 </div>
 
@@ -96,7 +100,18 @@
 	function progressBar(){
 		document.getElementById('progress').style.display = "block";
 	}
+	
+	function sent(){
+		if(document.getElementsByName('phone')[0].value != ''){
+			window.alert("Спасибо! Ваша заявка была отправлена.");
+			document.getElementsByClassName('close')[0].click();
+		}
+	}
 </script>
+
+<div style="margin-top: 30%"></div>
+
+<footer>"Photo Service" Все права защищены &copy 2015.</footer>
 
 </body>
 </html>
