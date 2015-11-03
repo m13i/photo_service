@@ -30,7 +30,7 @@
 				<div>
 					<ul class="nav navbar-nav">
 						<li class="active"><a onclick=window.open('index.html','_self')>На главную</a></li>
-						<li class="active"><a href="#">Каталог товаров</a></li>
+						<li class="active"><a onclick=window.open('shop.php')>Каталог товаров</a></li>
 						<li><a id="manual" onclick=window.open('manual.html')>Инструкция</a></li>
 						<li><a style="cursor:pointer" data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
 					</ul>
