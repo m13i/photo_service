@@ -40,7 +40,7 @@
 			$path = pathinfo($name);
 			$_SESSION['ext'][$index] = $path['extension']; // Assign variable that will save all extensions.
 			if(getimagesize($tmp_name) !== false) //Checking if uploaded file as truly image
-				move_uploaded_file($tmp_name, "$uploads_dir/".($index+1).".".$path['extension'] );
+				move_uploaded_file($tmp_name, "$uploads_dir/".$index.".".$path['extension'] );
 			else{ //if uploded file is not an image then throw notification and delete empty folder then exit from script.
 				echo "<center><h3>Извините но загружать можно только изображения, возможно вы выбрали лишний файл не являющийся изображением либо не выбрали ничего. Повторите заново.</h3></center>";
 				echo "<center><a href='upload.php'>Повторить заново</a></center>";
@@ -76,6 +76,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a onclick=window.open('index.html','_self')>На главную</a></li>
 						<li class="active"><a href="#">Каталог товаров</a></li>
+						<li><a id="manual" onclick=window.open('manual.html')>Инструкция</a></li>
 						<li><a style="cursor: pointer" data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -106,7 +107,7 @@
 		</select>
 			
 		<strong>Количество:</strong>
-		<input type="text" id="qty" value="1" name="qty" size="1">
+		<input type="number" step="1" id="qty" value="1" name="qty" size="1">
 		<button type="button" id="selectAll" onclick=select()>Выделить все</button>
 		<button type="button" id="unselectAll" onclick=unselect()>Снять все</button>
 		<button id="applyAll" onclick=applyToAll()>Применить ко всем выделеным</button>
@@ -121,8 +122,8 @@
 	
 	
 	foreach($files as $i => $file){
-		$filePath = explode('.', $file);//This is because glob sorts as a string and it's needed like numbers
-		$currentFile = "uploads/".$_SESSION['user']."/".($i+1).'.'.$filePath[1]; //$filePath[0] is path and $filePath[1]-is extension (e.g. jpg)
+		//$filePath = explode('.', $file);//This is because glob sorts as a string and it's needed like numbers
+		$currentFile = "uploads/".$_SESSION['user']."/".$i.'.'.$_SESSION['ext'][$i]; //$filePath[0] is path and $filePath[1]-is extension (e.g. jpg)
 ?>
 		<div class="box">
 			<img src="<?=$currentFile?>" >
@@ -150,7 +151,7 @@
 <div><a id="gotoTop" href="#top">На верх</a></div>
 
 <div class="order">
-		<form method="post" action="order.php">
+		<form method="post" action="order.php" target="_blank">
 			<h4 id="total">Общее количество фотографий: <strong></strong></h4>
 			<h4 id="totalPrice">Общая стоимость(без доставки): <strong></strong></h4>
 			<h4>Доставка: <strong>40 грн.</strong></h4>
@@ -160,7 +161,7 @@
 			
 			<legend>Оформление заказа:</legend>
 			<p>Ваше имя:</p><input type="text" pattern={0} required title="Вы ничего не ввели" name="username" placeholder="Имя" >
-			<p>Ваш email:</p><input type="text" pattern={0} required title="Вы ничего не ввели" name="email" placeholder="Email">
+			<p>Ваш email:</p><input type="text" name="email" placeholder="Email (Не обязательно)">
 			<p>Ваш телефон:</p><input type="text" pattern=".{10,10}" maxlength="10" 
 				required title="Слишком короткий номер телефона" name="phone" placeholder="Телефон">
 
@@ -445,7 +446,7 @@ function arrange(fr, tp){
 				temp += '+';
 				qtyPos += qty[i].getElementsByTagName('strong')[0].innerHTML;
 				qtyPos += ",";
-				pos += (i+1).toString();
+				pos += (i).toString();
 				pos += ",";
 			}
 		}

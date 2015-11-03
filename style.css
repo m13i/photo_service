@@ -65,6 +65,10 @@
 	margin: 1px;
 }
 
+.first_form input[type=number]{
+	width: 3em;
+}
+
 #upload{
 	background-color: #33CC33;
 	color: white;
@@ -103,6 +107,15 @@
 #gotoTop{
 	font-weight: bold;
 	margin-left: 50%;
+}
+
+#upload_info{
+	font-size: 14pt;
+	margin: 2em;
+}
+
+#upload_info a{
+	font-weight: bold;
 }
 
 .submit{

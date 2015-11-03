@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+	<title>Инструкция - Photo Service</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=420", user-scalable=false">
+	<link rel="stylesheet" type="text/css" href="manual.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="main.css"> 
+</head>
+<body>
+
+<div id="top"></div>
+<nav class="navbar navbar-default navbar-fixed-top" id="nav">	
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle navitem" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+		    </button>
+			<div>
+				<a id="landing" class="navbar-brand" href="#top" title="Сувенирная продукция и печать фото"><p>Photo Service</p></a>
+			</div>
+        </div>
+		<div>
+			<div class="collapse navbar-collapse navbar-collapse-in" id="myNavbar">
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a onclick=window.open('index.html','_self')>На главную</a></li>
+						<li class="active"><a href="#">Каталог товаров</a></li>
+						<li class="active"><a onclick=window.open('upload.php','_blank') title="загрузка фотографий">Заказать печать</a></li>
+						<li><a style="cursor:pointer" data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#top">Наверх</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<div class="modal fade" id="pupUpWindow">
+	<div class="modal-dialog">
+		<div class="modal-content">		
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="modal-name" style="text-align:center;">
+					<h3>Заявка на консультацию</h3>
+				</div>
+			</div>
+				
+			<div class="modal-body">
+				<form role="form" method="post" action="home_consult.php" target="_blank">
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" placeholder="Ваше имя">
+					</div>
+					
+					<div class="form-group">
+						<input type="text" name="email" class="form-control" placeholder="Ваше email (Необязательное поле)">
+					</div>
+					
+					<div class="form-group">
+						<input pattern=".{10,10}" maxlength="10" required title="Слишком короткий номер телефона" name="phone" class="form-control" placeholder="Ваш номер телефона (без тире)">
+					</div>
+					
+					<div class="modal-footer">
+						<input type="submit" onclick=sent() class="btn btn-primary btn-success" value="Отправить">
+					</div>
+					
+				</form>
+				
+				<div class="alert alert-info fade in">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<p>Либо звоните по телефонам: 063-425-70-62 , 095-259-83-17</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+	<div id="spacer"></div>
+	
+	<h1>Инструкция по закачиванию фотографий</h1>
+
+	<div class="step">
+		<h3>Шаг 1</h3>
+		<p>Уважаемы клиент, перед началом закачивания <strong>фотографий</strong> желательно подготовить на вашем компьютере папку куда вы сбросите все ваши <strong>фото</strong> которые хотите печатать.</p>
+		<p>Для начала загрузки <strong>фотографий</strong> необходимо нажать на кнопку "Выбрать файлы" после чего откроется окно для выбора файлов</p>
+		<img src="img/manual/1.jpg" alt="Печать фотографий онлайн">
+	</div>
+	
+	<div class="step">
+		<h3>Шаг 2</h3>
+		<p>В окне выбора найдите на вашем компьютере папку с готовыми <strong>фото</strong> и удерживая левую кнопку мыши выделите их.
+			Также вы можете выделять нужные <strong>фотографии</strong> при зажатой клавише Cntr, либо если хотите выделить последовательность 
+			фото зажмите Shift и щелкните на <strong>фотографии</strong>, таким образом выделиться последовательность <strong>фото</strong>.
+			После того как все <strong>фото</strong> выделены нажмите кнопку "Открыть"</p>
+		<img src="img/manual/2.jpg">
+		<p>После того как вы нажали на кнопку "Открыть" должно появиться количество выбраных <strong>фото</strong></p>
+		<img src="img/manual/2-1.jpg" alt="Заказ фотографий онлайн">
+	</div>
+	
+	<div class="step">
+		<h3>Шаг 3</h3>
+		<p>Дальше нужно нажать на кнопку "Загрузить фото" и дождаться окончания загрузки. Длительность зависит от количества и размера <strong>фотографий</strong></p>
+		<img src="img/manual/3.jpg" alt="Напечатать фотографии онлайн">
+	</div>
+	
+	<div class="step">
+		<h3>Шаг 4</h3>
+		<p>После того как <strong>фото</strong> загружены они будут отображены и они по умолчанию имеют <strong>формат 10х15 Глянец</strong> по 1 штуке.
+			Для того чтобы поменять эти параметры вам необходимо выделить нужные вам <strong>фотографии</strong>, после чего выбрать формат, тип бумаги (глянец, мат) и количество после чего нажать на кнопку "Применить ко всем выделеным"
+			тем самым все выбраные вами параметры будут применены к выделеным <strong>фотографиям</strong>.
+			<br>
+			После того как вы применили ваши установки к выбраным <strong>фото</strong> для удобства можете нажать на кнопку "Снять все" тем самым вы снимете все выделения.
+			<br>
+			Если же вам нужно применить одинаковые параментры ко всем фото просто нажмите "Выделить все" и выберете формат и т.д.
+		</p>	
+		<img src="img/manual/4.jpg" alt="Печать фото">
+	</div>
+	
+	<div class="step">
+		<h3>Шаг 5</h3>
+		<p>По завершению выбора формата, типа бумаги и количества прокрутите в самый низ либо нажмите на "Перейти к оформлению".
+			Там вы увидите окно оформления заказа где будет указано общее количетсво <strong>фотографий</strong>, общая цена без доставки и цена за доставку.
+			<br>
+			Для оформления заказа просто введите свое имя, адресс электронной почты и номер телефона для того чтобы мы могли связаться с вами для
+			уточнения заказа.
+			<br>
+			После веденных данных просто нажмите кнопку "Отправить заказ".
+		</p>	
+		<img src="img/manual/5.jpg" alt="Фотопечать онлайн">
+		<p>Также, прокрутив страницу ниже вы можете просмотреть подробную таблицу где занесена статистика вашего заказа т.е. общее кол-во фотографий для каждого формата.</p>
+		<img src="img/manual/5-2.jpg" alt="Напечетать фотографии">
+		<p>После отправки заказа просто ожидайте нашего звонка.</p>
+	</div>
+	
+</body>
+</html>

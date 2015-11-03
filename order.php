@@ -81,10 +81,8 @@ makeMattDir();
 
 //Merge two arrays into one
 $fullObject = array_merge($glossObject, $mattObject);
-moveToDir();
-
-
-
+moveToDirGloss();
+moveToDirMatt();
 //Setting all POST variable to send to the DB.
 $date = date("Y-m-d H:i:s");
 $user = $_POST['username'];
@@ -176,21 +174,43 @@ function getPosExploded($arr){
 
 //Moving uploaded files from root directory to specific format and quantity folders.
 // ***** TO DO *****
-function moveToDir(){
+function moveToDirGloss(){
 	global $glossObject;
 	$ext = $_SESSION['ext'];
 	$root = "uploads/{$_SESSION['user']}";
 	$glossSplited = getPosExploded($glossObject);
+	$glossQty = getQtyExploded($glossObject);
 	
-	
-	
-	/*foreach($glossObject as $key => $v){
-		if($v->getType() == 'Глянец'){
-			for($i = 0; $i < count($splited[$key]); $i++){
-				rename("{$root}/{$key}.{$ext[$key]}","{$root}/Gloss/{$v->getFormat()}/{$splited[$key][$i]}/{$key}.{$ext[$key]}");
+	for($key = 0; $key < count($glossSplited); $key++){
+		if($glossObject[$key]->getPosition() && $glossObject[$key]->getType() == 'Глянец'){
+
+			for($l = 0; $l < count($glossSplited[$key]); $l++){
+				rename("{$root}/{$glossSplited[$key][$l]}.{$ext[$l]}", "{$root}/Gloss/{$glossObject[$key]->getFormat()}/{$glossQty[$key][$l]}/{$glossSplited[$key][$l]}.{$ext[$l]}");
 			}
+			
 		}
-	}*/
+	}
+
 }
+
+function moveToDirMatt(){
+	global $mattObject;
+	$ext = $_SESSION['ext'];
+	$root = "uploads/{$_SESSION['user']}";
+	$mattSplited = getPosExploded($mattObject);
+	$mattQty = getQtyExploded($mattObject);
+	
+	for($key = 0; $key < count($mattSplited); $key++){
+		if($mattObject[$key]->getPosition() && $mattObject[$key]->getType() == 'Мат'){
+
+			for($l = 0; $l < count($mattSplited[$key]); $l++){
+				rename("{$root}/{$mattSplited[$key][$l]}.{$ext[$l]}", "{$root}/Matt/{$mattObject[$key]->getFormat()}/{$mattQty[$key][$l]}/{$mattSplited[$key][$l]}.{$ext[$l]}");
+			}
+			
+		}
+	}
+
+}
+
 
 ?>

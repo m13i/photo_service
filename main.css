@@ -99,6 +99,12 @@
   color: #00b0ff;
 }
 
+.learn-more-2{
+	text-align: center;
+	background-color: #efefef;
+	margin-bottom: 1em;
+}
+
 #header{
 	margin: 50px;
 	text-align: center;
@@ -119,6 +125,12 @@
 #consult form input[type=text]{
 	width: 15em;
 	height: 3em;
+}
+
+#manual{
+	cursor:pointer; 
+	font-weight: bold; 
+	background-color: wheat;
 }
 
 .desc{

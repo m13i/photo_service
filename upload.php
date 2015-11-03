@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +31,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a onclick=window.open('index.html','_self')>На главную</a></li>
 						<li class="active"><a href="#">Каталог товаров</a></li>
+						<li><a id="manual" onclick=window.open('manual.html')>Инструкция</a></li>
 						<li><a style="cursor:pointer" data-toggle="modal" data-target="#pupUpWindow">Перезвонить вам?</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -94,6 +93,21 @@
 <div id="progress" style="text-align: center; display:none">
 	<p>Подождите пока не отобразятся ваши фото...</p>
 	<progress value="90" max="100"></progress>
+</div>
+
+<div id="upload_info">
+	<p>Уважаемый пользователь! Так как на дворе 21й век вы имеете возможность не отрываясь от дел заказать печать фотографий
+		прямо с вашего компютера. Для этого вам возможно понадобиться ознакомиться с простой <a href="manual.html">инструкцией</a>
+		в которой подробно описано как осуществить заказ на <strong>пачать фотографий онлайн</strong> - это проще чем вы думаете!
+		Также наш сервис предоставляет различные <strong>фотоуслуги</strong>, например, <strong>печать на чашках</strong>, <strong>нанесение изображений на футболки</strong>,
+		<strong>печать на бокалах</strong>,
+		<strong>фотопечать</strong>, <strong>реставрация фотографий</strong>, <strong>печать на сувенирной продукции</strong>. 
+		<br>
+		Если у вас есть вопросы вы можете оставить
+		<a style="cursor:pointer" data-toggle="modal" data-target="#pupUpWindow"> заявку на консультацию</a>
+		<br>
+		<center><strong>Мы ценим наших клиентов и нашу работу и поэтому отвечаем за качество!</strong></center>
+	</p>
 </div>
 
 <script>
