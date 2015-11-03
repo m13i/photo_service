@@ -1,0 +1,24 @@
+*{
+	font-family: 'Calibri', 'Verdana', 'Shift', sans-serif;
+}
+
+body{
+	text-align: center;
+}
+
+#spacer{
+	margin: 5em;
+}
+
+h1{
+	text-align: center;
+	background-color: #33CC33;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.step{
+	font-size: 12pt;
+	border: 3px solid grey;
+	margin: 5px;
+}

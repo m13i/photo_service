@@ -1,0 +1,128 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	font-family: Georgia, "Calibri", Times, serif;
+}
+h1, h2, h3{
+	font-family: "Calibri", Arial, Helvetica, sans-serif;	
+}
+
+h1{
+	background-color: #00B800;
+	text-align: center;
+	padding: 10px;
+}
+
+.products {
+	padding: 0;
+	margin: 0;
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.products li {
+	display: inline-block;
+	width: 200px;
+	padding: 10px;
+	background-color: #FFFFFF;
+	margin: 10px;
+	border: 1px solid #EAEAEA;  
+	color: #3D3D3D;
+}
+
+.products .product .spacer{
+	padding: 25px;
+}
+
+.products li h3 {
+	margin: -10px -10px 10px -10px;
+	padding: 10px;
+	text-align: center;
+	background-color: #F5F5F5;
+	font-family: "Calibri", Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+	color: #5A5A5A;
+}
+.products li fieldset {
+	border: none;
+	padding: 5px 5px 5px 0px;
+	margin: 0;
+}
+.products li fieldset label{
+	display:block;
+	margin-bottom: 4px;
+}
+.products li fieldset label span{
+	width: 80px;
+	float: left;
+}
+.products li fieldset label select{
+	min-width: 100px;
+}
+
+.product .product-info *{
+	margin-top: 5px;
+}
+
+.product .product-info input[type=number]{
+	width: 40px;
+	margin-left: 3em;
+}
+
+button, .button{
+	background-color: #FF6600;
+	min-width: 100px;
+	border: none;
+	padding: 10px;
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: none;
+	color: #FFF;
+	min-height: 15px;
+	font: 12px/15px Arial, Helvetica, sans-serif;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.26);
+	border-radius: 3px;
+}
+button:hover, .button:hover{
+	background-color: #FF751A;
+}
+
+.product-thumb{
+	text-align:center;
+}
+
+.product-thumb img{
+	width: 100px;
+	height: 100px;
+}
+
+.product-desc {
+	font-style: italic;
+	font-size: 0.8em;
+	margin-bottom: 4px;
+	height: 40px;
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+.cart-view-table-front{
+	font-size: 0.7em;
+	border: 1px solid black;
+	border-radius: 20px;
+	position: fixed;
+	background-color: #efefef;
+	right: 30px;
+	max-width: 400px;
+	font-family: Arial
+}
+
+.cart-view-table-front input{
+	width: 40px;
+}
+
+.cart-view-table-front h3{
+	text-align: center;
+	padding: 0;
+	margin: 0px 0px 6px 0px;
+}
